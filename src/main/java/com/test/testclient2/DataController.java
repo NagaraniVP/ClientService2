@@ -22,7 +22,8 @@ public class DataController {
 
     @Value("${projectName}") //gets the cloud property
    private String project;
-    //TO get all data stored in DB
+
+    //TO get all User data stored in DB
     @RequestMapping("/all")
      public List<DataUserModel> getAll()
      {
@@ -30,7 +31,7 @@ public class DataController {
          return (List<DataUserModel>) userRepo.findAll();
      }
 
-    //Gets data using its Name
+    //Gets User data using User Name
     @RequestMapping(value="/byName/{name}",method = RequestMethod.GET)
     public DataUserModel getByName(@PathVariable String name)
     {
@@ -43,7 +44,7 @@ public class DataController {
     public List<DataUserModel> loadDetails(@RequestBody DataUserModel user)
     {
 
-        user.setProjectName(project);
+        user.setProjectName(project); //setting cloud property
         userRepo.save(user);
         return (List<DataUserModel>) userRepo.findAll();
     }
